@@ -8,6 +8,8 @@
 
 import UIKit
 
+// Simple UI to test if the message is indeed send to all peers
+
 class TellEveryoneViewController: UIViewController {
     
     let tellEveryoneService = TellEveryoneServiceManager()
