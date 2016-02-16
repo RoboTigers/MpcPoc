@@ -12,6 +12,8 @@ import UIKit
 
 class TellEveryoneViewController: UIViewController {
     
+    // Tip: Can test that the service is advertised on the local network either using the dns-sd terminal command:
+    // dns-sd -B _services._dns-sd._udp
     let tellEveryoneService = TellEveryoneServiceManager()
 
     @IBOutlet weak var msgLabel: UILabel!
