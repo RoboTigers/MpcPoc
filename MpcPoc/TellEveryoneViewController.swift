@@ -12,7 +12,7 @@ import UIKit
 
 class TellEveryoneViewController: UIViewController {
     
-    // Tip: Can test that the service is advertised on the local network either using the dns-sd terminal command:
+    // Tip: Can test that the service is advertised on the loxcal network either using the dns-sd terminal command:
     // dns-sd -B _services._dns-sd._udp
     let tellEveryoneService = TellEveryoneServiceManager()
 
@@ -22,16 +22,26 @@ class TellEveryoneViewController: UIViewController {
     
     @IBAction func tellEveryoneAction(sender: AnyObject) {
         msgLabel.text = msgInput.text
-        tellEveryoneService.sendTextString(msgInput.text!)
+        tellEveryoneService.sendTextString(msgInput.text!) // Only do this if sending (not receiving) data
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tellEveryoneService.delegate = self
+        // Dismiss keyboard when user taps outside of keyboard
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard")))
+    }
+    
+    func dismissKeyboard() {
+        msgInput.resignFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func reflectReceivedMessage (text: String) {
+        msgLabel.text = text
     }
 
 }
@@ -45,8 +55,9 @@ extension TellEveryoneViewController : TellEveryoneServiceManagerDelegate {
     }
     
     func textChanged(manager: TellEveryoneServiceManager, textString: String) {
+        print("In TEVC, textChanged and the text is \(textString)")
         NSOperationQueue.mainQueue().addOperationWithBlock {
-            self.tellEveryoneAction(textString)
+            self.reflectReceivedMessage(textString)
         }
     }
     
