@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		800B10401C7A4DBB006F89FF /* Team+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800B103E1C7A4DBB006F89FF /* Team+CoreDataProperties.swift */; };
+		800B10411C7A4DBB006F89FF /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800B103F1C7A4DBB006F89FF /* Team.swift */; };
+		800B10431C7A4DE5006F89FF /* TeamForSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800B10421C7A4DE5006F89FF /* TeamForSync.swift */; };
+		804AF3F01C7DB9EF00B7A1B6 /* SyncUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804AF3EF1C7DB9EF00B7A1B6 /* SyncUtils.swift */; };
 		805109A61C72BEFB00952516 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805109A51C72BEFB00952516 /* AppDelegate.swift */; };
 		805109A81C72BEFB00952516 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805109A71C72BEFB00952516 /* ViewController.swift */; };
 		805109AB1C72BEFB00952516 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 805109A91C72BEFB00952516 /* Main.storyboard */; };
@@ -18,6 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		800B103E1C7A4DBB006F89FF /* Team+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Team+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		800B103F1C7A4DBB006F89FF /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		800B10421C7A4DE5006F89FF /* TeamForSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamForSync.swift; sourceTree = "<group>"; };
+		804AF3EF1C7DB9EF00B7A1B6 /* SyncUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncUtils.swift; sourceTree = "<group>"; };
 		805109A21C72BEFB00952516 /* MpcPoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MpcPoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		805109A51C72BEFB00952516 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		805109A71C72BEFB00952516 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,14 +69,18 @@
 			isa = PBXGroup;
 			children = (
 				805109A51C72BEFB00952516 /* AppDelegate.swift */,
-				805109A71C72BEFB00952516 /* ViewController.swift */,
+				805109AF1C72BEFB00952516 /* Assets.xcassets */,
+				805109B41C72BEFB00952516 /* Info.plist */,
+				805109B11C72BEFB00952516 /* LaunchScreen.storyboard */,
 				805109A91C72BEFB00952516 /* Main.storyboard */,
+				805109AC1C72BEFB00952516 /* MpcPoc.xcdatamodeld */,
+				800B103F1C7A4DBB006F89FF /* Team.swift */,
+				800B103E1C7A4DBB006F89FF /* Team+CoreDataProperties.swift */,
+				800B10421C7A4DE5006F89FF /* TeamForSync.swift */,
 				805109BC1C72C31F00952516 /* TellEveryoneServiceManager.swift */,
 				805109BA1C72BF4C00952516 /* TellEveryoneViewController.swift */,
-				805109AF1C72BEFB00952516 /* Assets.xcassets */,
-				805109B11C72BEFB00952516 /* LaunchScreen.storyboard */,
-				805109B41C72BEFB00952516 /* Info.plist */,
-				805109AC1C72BEFB00952516 /* MpcPoc.xcdatamodeld */,
+				804AF3EF1C7DB9EF00B7A1B6 /* SyncUtils.swift */,
+				805109A71C72BEFB00952516 /* ViewController.swift */,
 			);
 			path = MpcPoc;
 			sourceTree = "<group>";
@@ -145,11 +157,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				800B10401C7A4DBB006F89FF /* Team+CoreDataProperties.swift in Sources */,
 				805109BB1C72BF4C00952516 /* TellEveryoneViewController.swift in Sources */,
+				800B10411C7A4DBB006F89FF /* Team.swift in Sources */,
 				805109A81C72BEFB00952516 /* ViewController.swift in Sources */,
 				805109A61C72BEFB00952516 /* AppDelegate.swift in Sources */,
 				805109AE1C72BEFB00952516 /* MpcPoc.xcdatamodeld in Sources */,
 				805109BD1C72C31F00952516 /* TellEveryoneServiceManager.swift in Sources */,
+				800B10431C7A4DE5006F89FF /* TeamForSync.swift in Sources */,
+				804AF3F01C7DB9EF00B7A1B6 /* SyncUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

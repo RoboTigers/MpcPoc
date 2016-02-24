@@ -20,6 +20,7 @@ protocol TellEveryoneServiceManagerDelegate {
     
     func connectedDevicesChanged(manager : TellEveryoneServiceManager, connectedDevices: [String])
     func textChanged(manager : TellEveryoneServiceManager, textString: String)
+    func dataChanged(manager : TellEveryoneServiceManager, data: NSData)
     
 }
 
@@ -78,6 +79,42 @@ class TellEveryoneServiceManager: NSObject {
         }
         
     }
+    
+    func sendData(data : NSData) {
+        print("sendData: \(data)")
+        
+        if session.connectedPeers.count > 0 {
+            var error : NSError?
+            do {
+                try self.session.sendData(data, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
+            } catch let error1 as NSError {
+                error = error1
+                print("\(error)")
+            }
+        }
+        
+    }
+    
+//    func sendAnObject(obj : TeamForSync) {
+//        print("sendAnObject: \(obj.teamName) and \(obj.teamNumber)")
+//        let coder = NSCoder()
+//        obj.encodeWithCoder(coder)
+//        
+//        let foo : Team = Team()
+//        foo.teamNumber=101
+//        foo.teamName="foo"
+//        foo.
+//        if session.connectedPeers.count > 0 {
+//            var error : NSError?
+//            do {
+//                try self.session.sendData(obj, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
+//            } catch let error1 as NSError {
+//                error = error1
+//                print("\(error)")
+//            }
+//        }
+//        
+//    }
 
 }
 
@@ -147,8 +184,9 @@ extension TellEveryoneServiceManager : MCSessionDelegate {
     func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
         print("didReceiveData: \(data) of length \(data.length) bytes")
         // delegate is notified when data is received
-        let str = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
-        self.delegate?.textChanged(self, textString: str)
+        //FOR TEXT: let str = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
+        //FOR TEXT: self.delegate?.textChanged(self, textString: str)
+        self.delegate?.dataChanged(self, data: data)
     }
     
     func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
