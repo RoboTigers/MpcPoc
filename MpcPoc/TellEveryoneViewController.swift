@@ -38,18 +38,42 @@ class TellEveryoneViewController: UIViewController {
         let teamDict : [String: AnyObject] = myTeam.toDictionary()
         print ("SHARON: teamDict = \(teamDict)")
         print ("SHARON: dict teamName: \(teamDict["teamName"])")
+        
+        var dictToSend = [String: AnyObject]()
+        dictToSend["entityDiscriminator"] = "TEAM"
+        dictToSend["entityObject"] = teamDict
+        
+        
+        
         var myJson : NSData = NSData()
         do {
-            try myJson = NSJSONSerialization.dataWithJSONObject(teamDict, options: NSJSONWritingOptions.PrettyPrinted)
+            try myJson = NSJSONSerialization.dataWithJSONObject(dictToSend, options: NSJSONWritingOptions.PrettyPrinted)
         } catch {
             print("json error: \(error)")
         }
         print ("SHARON !!! myJson is \(myJson)")
         
+        
         // just testing here - this needs to go to the place where data is received.. just testing now locally
-        let expectedTeamToReceive = Team(entity: entity!, insertIntoManagedObjectContext: context)
-        expectedTeamToReceive.loadFromJson(myJson)
-        print ("expectedTeamToReceive = \(expectedTeamToReceive)")
+        if let dictReceived: AnyObject = try! NSJSONSerialization.JSONObjectWithData(myJson, options: []) as? NSDictionary {
+            print ("Dictionary received")
+            print ("dictReceived = \(dictReceived)")
+            let disriminator:String = (dictReceived["entityDiscriminator"] as? String)!
+            let entityObject: NSDictionary = (dictReceived["entityObject"] as? NSDictionary)!
+            print("discriminator received:  \(disriminator)")
+            print("entity object received: \(entityObject)")
+            if (disriminator == "TEAM") {
+                print("Unpack json to get team data")
+                let expectedTeamToReceive = Team(entity: entity!, insertIntoManagedObjectContext: context)
+                let entityObject: NSDictionary = (dictReceived["entityObject"] as? NSDictionary)!
+                expectedTeamToReceive.loadFromJson(entityObject)
+                print ("expectedTeamToReceive = \(expectedTeamToReceive)")
+            }
+            print("done with test - did you get a team???")
+        }
+            // end testing
+        
+        
         
         tellEveryoneService.sendData(myJson)
     }
@@ -97,8 +121,31 @@ extension TellEveryoneViewController : TellEveryoneServiceManagerDelegate {
         let context:NSManagedObjectContext = appDel.managedObjectContext
         let entity = NSEntityDescription.entityForName("Team", inManagedObjectContext: context)
         let receivedTeam = Team(entity: entity!, insertIntoManagedObjectContext: context)
+        
+        
         // Get received team from json data
-        receivedTeam.loadFromJson(data)
+        //receivedTeam.loadFromJson(data)
+        
+        if let dictReceived: AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary {
+            print ("Dictionary received")
+            print ("dictReceived = \(dictReceived)")
+            
+            
+            let disriminator:String = (dictReceived["entityDiscriminator"] as? String)!
+            let entityObject: NSDictionary = (dictReceived["entityObject"] as? NSDictionary)!
+            print("discriminator received:  \(disriminator)")
+            print("entity object received: \(entityObject)")
+            if (disriminator == "TEAM") {
+                print("Unpack json to get team data")
+                receivedTeam.loadFromJson(entityObject)
+            }
+            
+            
+            print ("unpacked team = \(receivedTeam)")
+        }
+        
+        
+        
         print ("receivedTeam = \(receivedTeam)")
         NSOperationQueue.mainQueue().addOperationWithBlock {
             self.reflectReceivedMessage(receivedTeam.teamName!)
