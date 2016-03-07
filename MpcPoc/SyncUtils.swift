@@ -25,8 +25,3 @@ extension Team {
     
 }
 
-//do {
-//    try myJson = NSJSONSerialization.dataWithJSONObject(teamDict, options: NSJSONWritingOptions.PrettyPrinted)
-//} catch {
-//    print("json error: \(error)")
-//}
